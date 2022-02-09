@@ -248,7 +248,6 @@ e20()
 
 func e27(m: Int, k: Int) {
     var a = m
-    var b = k
     var count = 0
     repeat {
         a -= k
@@ -293,4 +292,53 @@ func e30() {
 }
 e30()
 
+let calendar = Calendar.current
+let date = Date()
 
+let dateComponents = DateComponents(calendar: calendar, year: 1951, month: 8, day: 8)
+let compDate = calendar.date(from: dateComponents)
+
+func d1(d: Date, c: Calendar) {
+    let year = calendar.component(.year, from: d)
+    let month = calendar.component(.month, from: d)
+    let day = calendar.component(.day, from: d)
+    if year < 1950 {
+        print("Error")
+    } else {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let someDateTime = formatter.date(from: "\(year)/\(month)/\(day)")
+        print(someDateTime!)
+    }
+}
+d1(d: compDate!, c: calendar)
+
+func d2(d: Date, c: Calendar, n: Int) -> Date {
+    let calendar = Calendar(identifier: .gregorian)
+    let nextDayDate = calendar.date(byAdding: .day, value: n, to: d)!
+    print(nextDayDate)
+    return nextDayDate
+}
+
+func d3(d: Date, c: Calendar) {
+    let weekday = calendar.component(.weekday, from: d)
+    print(weekday)
+}
+
+d3(d: d2(d: compDate!, c: calendar, n: 345), c: calendar)
+
+let d2 = Date()
+let d3 = Date()
+
+
+func d4(d2: Date, d3: Date) -> (String,String) {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy/MM/dd"
+    let formatter2 = DateFormatter()
+    formatter2.dateFormat = "yyyy/MM/dd HH:mm:SS"
+    let smd1 = formatter.string(from: d2)
+    let smd2 = formatter2.string(from: d3)
+    return (smd1,smd2)
+}
+
+d4(d2: d2, d3: d3)
